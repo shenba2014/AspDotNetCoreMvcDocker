@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AspDotNetCoreMvcDocker.Models;
+﻿using AspDotNetCoreMvcDocker.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql;
 
 namespace AspDotNetCoreMvcDocker
 {
@@ -22,8 +20,15 @@ namespace AspDotNetCoreMvcDocker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var host = Configuration["DBHOST"] ?? "localhost";
+            var port = Configuration["DBPORT"] ?? "3306";
+            var password = Configuration["DBPASSWORD"] ?? "password";
+            services.AddDbContext<BookDbContext>(options =>
+            options.UseMySql($"server={host};userid=root;pwd={password};"
+            + $"port={port};database=books"));
             services.AddSingleton<IConfiguration>(Configuration);
-            services.AddTransient<IRepository, DummyRepository>();
+            services.AddTransient<IRepository, BookRepository>();
+
             services.AddMvc();
         }
 
