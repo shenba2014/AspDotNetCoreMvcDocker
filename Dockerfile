@@ -2,7 +2,7 @@ FROM microsoft/aspnetcore:2.0.0
 
 COPY dist /app
 
-COPY node_modules/wait-for-it.sh/bin/wait-for-it /app/wait-for-it.sh
+COPY dist/node_modules/wait-for-it.sh/bin/wait-for-it /app/wait-for-it.sh
 
 RUN chmod +x /app/wait-for-it.sh
 
