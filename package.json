@@ -1,0 +1,23 @@
+{
+  "name": "aspdotnetcovemvcdocker",
+  "version": "1.0.0",
+  "description": "an asp.net core mvc example running in docker",
+  "main": "index.js",
+  "dependencies": {
+    "wait-for-it.sh": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shenba2014/AspDotNetCoreMvcDocker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shenba2014/AspDotNetCoreMvcDocker/issues"
+  },
+  "homepage": "https://github.com/shenba2014/AspDotNetCoreMvcDocker#readme"
+}
