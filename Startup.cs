@@ -20,12 +20,7 @@ namespace AspDotNetCoreMvcDocker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var host = Configuration["DBHOST"] ?? "localhost";
-            var port = Configuration["DBPORT"] ?? "3306";
-            var password = Configuration["DBPASSWORD"] ?? "password";
-            services.AddDbContext<BookDbContext>(options =>
-            options.UseMySql($"server={host};userid=root;pwd={password};"
-            + $"port={port};database=books"));
+            services.AddDbContext<BookDbContext>();
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddTransient<IRepository, BookRepository>();
 

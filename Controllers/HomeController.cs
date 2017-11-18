@@ -17,7 +17,7 @@ namespace AspDotNetCoreMvcDocker.Controllers
         public HomeController(IRepository repository, IConfiguration config)
         {
             _repository = repository;
-            message = config["MESSAGE"] ?? "AspDotNetCore Docker Example";
+            message = config["MESSAGE"] ?? "AspDotNetCore Docker Example" + $" (from server:{config["HOSTNAME"]})";
         }
 
         public IActionResult Index()

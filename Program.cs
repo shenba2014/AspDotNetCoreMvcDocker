@@ -23,7 +23,16 @@ namespace AspDotNetCoreMvcDocker
                 var services = scope.ServiceProvider;
                 try
                 {
-                    SeedData.EnsurePopulated(services);
+                    var configuration = services.GetService<IConfiguration>();
+                    var initDb = configuration.GetValue("INITDB", "false") == "true";
+                    if (initDb){
+                        System.Console.WriteLine("Preparing Database...");
+                        SeedData.EnsurePopulated(services);
+                        System.Console.WriteLine("Database Preparation Complete");
+                    }
+                    else{
+                        host.Run();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -31,8 +40,6 @@ namespace AspDotNetCoreMvcDocker
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
-
-            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
